@@ -8,7 +8,7 @@ from io import BytesIO
 # ==========================================
 # 1. CORE AI CONFIGURATION
 # ==========================================
-GEMINI_API_KEY = "AQ.Ab8RN6KdaQo2rHAqCxf-RO-JtgM9Y8HebUQVxZxoRWzsExv3VA"  # <-- Paste your Google Studio Key here
+GEMINI_API_KEY = "your geminie_key"  # <-- Paste your Google Studio Key here
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel('gemini-2.5-flash')
 
@@ -16,7 +16,7 @@ model = genai.GenerativeModel('gemini-2.5-flash')
 # 2. NETWORK CONNECTION PARAMS
 # ==========================================
 # Make sure this matches the base address currently on your smartphone screen!
-PHONE_BASE_URL = "http://192.168.137.197:8080"
+PHONE_BASE_URL = "http://192.168.137""
 
 # Common snapshot route paths used by different smartphone camera apps
 SNAPSHOT_ROUTES = ["/shot.jpg", "/snapshot.jpg", "/photo.jpg", "/photoaf.jpg"]
