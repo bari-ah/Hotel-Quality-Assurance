@@ -16,7 +16,7 @@ model = genai.GenerativeModel('gemini-2.5-flash')
 # 2. NETWORK CONNECTION PARAMS
 # ==========================================
 # Make sure this matches the base address currently on your smartphone screen!
-PHONE_BASE_URL = "http://192.168.137""
+PHONE_BASE_URL = "http://192.168.137"
 
 # Common snapshot route paths used by different smartphone camera apps
 SNAPSHOT_ROUTES = ["/shot.jpg", "/snapshot.jpg", "/photo.jpg", "/photoaf.jpg"]
