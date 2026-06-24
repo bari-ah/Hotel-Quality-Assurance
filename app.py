@@ -72,7 +72,7 @@ if 'audit_history' not in st.session_state:
 # ==========================================
 st.sidebar.header("Control Panel")
 
-# Automated variable tracking across hosting system layers
+# Variable validation sequence pulling keys invisibly from environment matrices
 if "GEMINI_API_KEY" in st.secrets:
     api_key = st.secrets["GEMINI_API_KEY"]
 elif os.getenv("GEMINI_API_KEY"):
@@ -93,9 +93,9 @@ st.sidebar.success("● AI Engine Core Operational")
 st.sidebar.info("● RTSP Endpoint Synced")
 
 if not api_key:
-    st.error("⚠️ Enterprise Encryption Engine Missing. Please check your hosting provider deployment secrets cloud settings.")
+    st.error("⚠️ Enterprise Encryption Engine Missing. Please check your hosting provider deployment secrets cloud settings configuration layer.")
 else:
-    # Initialize credentials mapping block
+    # Initialize credentials connection routing structures
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel('gemini-2.5-flash')
     stream_url = f"http://{phone_ip}/shot.jpg"
@@ -119,7 +119,7 @@ else:
         st.subheader("📹 Real-Time Video Ingestion")
         st.caption("Active monitoring array pulling data frames from designated resort zones.")
         
-        # Interactive bypass switch designed for stakeholder preview meetings
+        # Interactive system bypass layer config for stakeholder meetings
         demo_mode = st.toggle("✨ Enable Pitch Demo Presentation Mode (No Hardware Required)", value=True)
         
         # Action Buttons Layout
@@ -137,7 +137,8 @@ else:
         if run_scan:
             if demo_mode:
                 with st.spinner("Simulating live hardware connection and grabbing client-ready room asset..."):
-                    sample_url = "https://unsplash.com"
+                    # Strict standard-compliant placeholder asset address endpoint configuration 
+                    sample_url = "https://githubusercontent.com"
                     try:
                         response = requests.get(sample_url, timeout=10)
                         live_image = Image.open(BytesIO(response.content))
@@ -156,7 +157,7 @@ else:
                         else:
                             st.error(f"Hardware Ingestion Interrupted. Server Flag Code: {response.status_code}")
                     except Exception as e:
-                        st.error(f"Network Timeout: Verify app streaming is active. Trace: {e}")
+                        st.error(f"Network Timeout: Unable to query connection route. Verify app streaming is active. Trace: {e}")
 
     with right_pane:
         st.subheader("📋 Advanced AI Compliance Diagnostic Report")
@@ -187,6 +188,7 @@ else:
                     output_text = ai_response.text
                     st.markdown(output_text)
 
+                    # Update history ledger data elements seamlessly
                     status_flag = "FAIL" if "CRITICAL DISCREPANCY" in output_text else "PASS"
                     current_time = datetime.datetime.now().strftime("%H:%M:%S")
                     
