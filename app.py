@@ -5,6 +5,7 @@ import requests
 from io import BytesIO
 import datetime
 import pandas as pd
+import base64  # Added for decoding the layout graphic
 
 # ==========================================
 # 1. PLATFORM CONFIGURATION & DESIGN
@@ -26,9 +27,37 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Main Title Framework
-st.title("🛡️ AEGIS HOSPITALITY AI")
-st.caption("Enterprise Multimodal Quality Assurance Autonomous Infrastructure v2.4")
+# Main Title Framework with Visual Brand Asset
+title_col1, title_col2 = st.columns([0.85, 0.15])
+
+with title_col1:
+    st.title("🛡️ AEGIS HOSPITALITY AI")
+    st.caption("Enterprise Multimodal Quality Assurance Autonomous Infrastructure v2.4")
+
+with title_col2:
+    # ----------------------------------------------------
+    # COMPATIBLE FRONTEND IMAGE ASSET DECODING MATRIX (PNG)
+    # ----------------------------------------------------
+    base64_image_string = (
+        "iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwY"
+        "AAACwUlEQVR4nO2Zy2sUURTGf9OkM0wzM8bYGEwUfCg+wE0gSgXduXChC0FwKfiAILgWwXWh"
+        "In7gP0BwV90I7oUuXInSgAt9gIovfCg+wEw6bZpM0osZa6YzkzSdaZILfTAw3Mv5fR/n3HPP"
+        "vYWhYWhoaGhoaGiY99A80AO8bOLeAn6m9G0P8Ag4bS6FNoDjwI9Un6W8pXbYyOAtYAnYDLwG"
+        "noZ6w8AIUANuAk+AbaA7pE9SNoALId0R0F0U9oU9B9mHsk6gXf0T6I6gLw2UgfshbVfofofO"
+        "AnpSujvYF/b9kK6v672mG6fR0Z9P6R5bH6u6pZDuDukN3XpI9yDkW8L+K91f1mcoZ6W7Eepu"
+        "BDo9wBvAnT6OAnfS6T6A+0A3cBa4BNwBhoChpE8C1wOdB76ldI8An9Lp7gf39wX6wX1h3w/p"
+        "+rpuxXWbofsdOgt8XmPfe90Z6G7SrepaXbcZuuPQ7Yfut+gG9AboIbpN0EfoPukT4f4FdAbo"
+        "IfrDkL4P6O8H9PekfNid6A7RXYTuDdAjdOugT9DHQx8m8CHdfegToZ/vI9DDoIfoAnQH6Sbo"
+        "PnQfegjdR7efboI+Qp+gT4Q+TOCb6B5A96F70EPoPrr9dBP0EfoEfYTuSfkI3SfdJ9D7wL3S"
+        "fSrdO93D0r0v3Uu6V4HHwD3gLnCH7g66O8A94F5I9zBwW9idwG1hvwVsS+vWpXUtYMt667Xv"
+        "te9XGgKGAc9H8DGlbwv7g0DfhbQz6O9Oun3gXsh3SfcK8Bi4l3QfSvcgdEfYrcDtUGe99bZ3"
+        "6Wzvu+n6wW3X7YXuu+i2QbeFfhfQD7g+7fO+vS7X7bVunE6/A78X6CHdAeihkO4IdAfoAfoA"
+        "3Yfuo9tPd5BuP/R66RXAfdp36Gzo9gHvhXQPpLsXujfUfU99w0RDQ0NDQ0NDQ0N98Bexn/oK"
+        "f+w7+gAAAABJRU5ErkJggg=="
+    )
+    image_bytes = base64.b64decode(base64_image_string)
+    st.image(image_bytes, output_format="PNG", use_container_width=True)
+
 st.markdown("---")
 
 # Initialize persistent session storage for the live tracking matrix table
@@ -37,15 +66,13 @@ if 'audit_history' not in st.session_state:
         {"Timestamp": "17:45:12", "Zone": "Room 102", "Metric": "94%", "Status": "PASS", "Action Taken": "Log Saved"},
         {"Timestamp": "18:02:44", "Zone": "Lobby Area", "Metric": "88%", "Status": "PASS", "Action Taken": "Log Saved"},
     ]
-
 # ==========================================
 # 2. MANAGEMENT CONTROL PANEL (SIDEBAR)
 # ==========================================
-st.sidebar.image("https://icons8.com", width=60)
 st.sidebar.header("Control Panel")
 
 api_key = st.sidebar.text_input("Gemini Engine Token Key:", type="password")
-phone_ip = st.sidebar.text_input("Active Camera IP Core:", "192.168.137.197:8080")
+phone_ip = st.sidebar.text_input("Active Camera IP Core:", "10.182.93.231:8080")
 
 st.sidebar.markdown("---")
 st.sidebar.subheader("System Status")
@@ -164,4 +191,3 @@ else:
         st.dataframe(df, use_container_width=True, hide_index=True)
     else:
         st.write("Ledger database layer is currently empty.")
-
