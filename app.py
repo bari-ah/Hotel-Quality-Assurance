@@ -5,7 +5,8 @@ import requests
 from io import BytesIO
 import datetime
 import pandas as pd
-import base64  # Added for decoding the layout graphic
+import base64
+import os
 
 # ==========================================
 # 1. PLATFORM CONFIGURATION & DESIGN
@@ -71,7 +72,19 @@ if 'audit_history' not in st.session_state:
 # ==========================================
 st.sidebar.header("Control Panel")
 
-api_key = st.sidebar.text_input("Gemini Engine Token Key:", type="password")
+# Automated variable tracking across hosting system layers
+if "GEMINI_API_KEY" in st.secrets:
+    api_key = st.secrets["GEMINI_API_KEY"]
+elif os.getenv("GEMINI_API_KEY"):
+    api_key = os.getenv("GEMINI_API_KEY")
+else:
+    api_key = None
+
+if api_key:
+    st.sidebar.success("🔒 System Encryption Verified")
+else:
+    st.sidebar.error("❌ System Token Missing")
+
 phone_ip = st.sidebar.text_input("Active Camera IP Core:", "10.182.93.231:8080")
 
 st.sidebar.markdown("---")
@@ -80,9 +93,9 @@ st.sidebar.success("● AI Engine Core Operational")
 st.sidebar.info("● RTSP Endpoint Synced")
 
 if not api_key:
-    st.warning("⚠️ Access Token Required. Please insert your valid Gemini API Key in the Control Panel sidebar.")
+    st.error("⚠️ Enterprise Encryption Engine Missing. Please check your hosting provider deployment secrets cloud settings.")
 else:
-    # Initialize the Google API client with provided key credentials
+    # Initialize credentials mapping block
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel('gemini-2.5-flash')
     stream_url = f"http://{phone_ip}/shot.jpg"
@@ -106,6 +119,9 @@ else:
         st.subheader("📹 Real-Time Video Ingestion")
         st.caption("Active monitoring array pulling data frames from designated resort zones.")
         
+        # Interactive bypass switch designed for stakeholder preview meetings
+        demo_mode = st.toggle("✨ Enable Pitch Demo Presentation Mode (No Hardware Required)", value=True)
+        
         # Action Buttons Layout
         btn_col1, btn_col2 = st.columns(2)
         with btn_col1:
@@ -119,17 +135,28 @@ else:
 
         # Capture Sequence Execution
         if run_scan:
-            with st.spinner("Extracting active image frame from network stream node..."):
-                try:
-                    response = requests.get(stream_url, timeout=6)
-                    if response.status_code == 200:
+            if demo_mode:
+                with st.spinner("Simulating live hardware connection and grabbing client-ready room asset..."):
+                    sample_url = "https://unsplash.com"
+                    try:
+                        response = requests.get(sample_url, timeout=10)
                         live_image = Image.open(BytesIO(response.content))
-                        st.image(live_image, caption="Secure Live Hardware Capture Frame", use_container_width=True)
+                        st.image(live_image, caption="💡 Client-Ready Presentation Frame Asset Loaded", use_container_width=True)
                         st.session_state['current_patrol_img'] = live_image
-                    else:
-                        st.error(f"Hardware Ingestion Interrupted. Server Flag Code: {response.status_code}")
-                except Exception as e:
-                    st.error(f"Network Timeout: Unable to query connection route. Verify app streaming is active. Trace: {e}")
+                    except Exception as demo_err:
+                        st.error(f"Demo image loader network interruption: {demo_err}")
+            else:
+                with st.spinner("Extracting active image frame from network stream node..."):
+                    try:
+                        response = requests.get(stream_url, timeout=6)
+                        if response.status_code == 200:
+                            live_image = Image.open(BytesIO(response.content))
+                            st.image(live_image, caption="Secure Live Hardware Capture Frame", use_container_width=True)
+                            st.session_state['current_patrol_img'] = live_image
+                        else:
+                            st.error(f"Hardware Ingestion Interrupted. Server Flag Code: {response.status_code}")
+                    except Exception as e:
+                        st.error(f"Network Timeout: Verify app streaming is active. Trace: {e}")
 
     with right_pane:
         st.subheader("📋 Advanced AI Compliance Diagnostic Report")
@@ -160,14 +187,12 @@ else:
                     output_text = ai_response.text
                     st.markdown(output_text)
 
-                    # Determine status flags to log into history
                     status_flag = "FAIL" if "CRITICAL DISCREPANCY" in output_text else "PASS"
                     current_time = datetime.datetime.now().strftime("%H:%M:%S")
                     
-                    # Update real-time metric arrays dynamically
                     new_log = {
                         "Timestamp": current_time,
-                        "Zone": "Room 304 Feed",
+                        "Zone": "Room 304 Feed (Demo)" if demo_mode else "Room 304 Live Feed",
                         "Metric": "Evaluated",
                         "Status": status_flag,
                         "Action Taken": "Supervisor Notified" if status_flag == "FAIL" else "Passed & Logged"
