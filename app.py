@@ -93,7 +93,7 @@ st.sidebar.success("● AI Engine Core Operational")
 st.sidebar.info("● RTSP Endpoint Synced")
 
 if not api_key:
-    st.error("⚠️ Enterprise Encryption Engine Missing. Please check your hosting provider deployment secrets cloud settings configuration layer.")
+    st.error("⚠️ Enterprise Encryption Engine Missing. Please check your hosting provider deployment secrets settings.")
 else:
     # Initialize credentials connection routing structures
     genai.configure(api_key=api_key)
@@ -119,7 +119,7 @@ else:
         st.subheader("📹 Real-Time Video Ingestion")
         st.caption("Active monitoring array pulling data frames from designated resort zones.")
         
-        # Interactive system bypass layer config for stakeholder meetings
+        # Zero-storage presentation mode toggle switch configuration
         demo_mode = st.toggle("✨ Enable Pitch Demo Presentation Mode (No Hardware Required)", value=True)
         
         # Action Buttons Layout
@@ -136,16 +136,14 @@ else:
         # Capture Sequence Execution
         if run_scan:
             if demo_mode:
-                with st.spinner("Simulating live hardware connection and grabbing client-ready room asset..."):
-                    # Strict standard-compliant placeholder asset address endpoint configuration 
-                    sample_url = "https://githubusercontent.com"
+                with st.spinner("Generating zero-storage synthetic hardware asset..."):
                     try:
-                        response = requests.get(sample_url, timeout=10)
-                        live_image = Image.open(BytesIO(response.content))
-                        st.image(live_image, caption="💡 Client-Ready Presentation Frame Asset Loaded", use_container_width=True)
+                        # Dynamically creates a slate-blue layout canvas without using disk storage weight
+                        live_image = Image.new('RGB', (500, 350), color='#1e293b')
+                        st.image(live_image, caption="💡 Synthetic Presentation Matrix Asset Loaded", use_container_width=True)
                         st.session_state['current_patrol_img'] = live_image
                     except Exception as demo_err:
-                        st.error(f"Demo image loader network interruption: {demo_err}")
+                        st.error(f"Matrix processor failure: {demo_err}")
             else:
                 with st.spinner("Extracting active image frame from network stream node..."):
                     try:
@@ -157,7 +155,7 @@ else:
                         else:
                             st.error(f"Hardware Ingestion Interrupted. Server Flag Code: {response.status_code}")
                     except Exception as e:
-                        st.error(f"Network Timeout: Unable to query connection route. Verify app streaming is active. Trace: {e}")
+                        st.error(f"Network Timeout: Unable to query connection route. Trace: {e}")
 
     with right_pane:
         st.subheader("📋 Advanced AI Compliance Diagnostic Report")
@@ -188,7 +186,7 @@ else:
                     output_text = ai_response.text
                     st.markdown(output_text)
 
-                    # Update history ledger data elements seamlessly
+                    # Append metrics seamlessly into historical log entries
                     status_flag = "FAIL" if "CRITICAL DISCREPANCY" in output_text else "PASS"
                     current_time = datetime.datetime.now().strftime("%H:%M:%S")
                     
